@@ -48,4 +48,16 @@ describe PagesController do
     end
   end
 
+  describe "GET 'help'" do
+    it "should be successful" do
+      visit '/pages/help'
+      page.should have_content('Help')
+    end
+
+    it 'should have the right title' do
+      visit '/pages/help'
+      page.should have_selector('title', :text => "#{@base_url} | Help")
+    end
+  end
+
 end
