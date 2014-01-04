@@ -41,6 +41,13 @@ Spork.each_run do
   # Capybara because it starts the web server in a thread.
   ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection
 
+  ActiveSupport::Dependencies.clear
+  ActiveRecord::Base.instantiate_observers
+
+  Dir[File.join(File.dirname(__FILE__), '..', 'app', 'helpers', '*.rb')].each do |file|
+    require file
+  end
+
   # This code will be run each time you run your specs.
   load "#{Rails.root}/config/routes.rb"
   #FactoryGirl.reload
