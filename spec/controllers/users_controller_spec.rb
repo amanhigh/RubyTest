@@ -18,6 +18,21 @@ describe UsersController do
       get :show, :id => @user
       assigns(:user).should == @user
     end
+
+    it 'should have right title' do
+      visit user_path(@user)
+      page.should have_selector('title', :text => @user.name)
+    end
+
+    it "should have user's name" do
+      visit user_path(@user)
+      page.should have_selector('h1', :text => @user.name)
+    end
+
+    it "should have profile image" do
+      visit user_path(@user)
+      page.should have_selector('h1>img', :class => "gravatar")
+    end
   end
 
   describe "GET 'new'" do
