@@ -19,7 +19,7 @@ describe PagesController do
     end
 
     it 'should not have empty body' do
-      visit '/home'
+      visit '/'
       page.body.should_not =~ /<body>\s*<\/body>/
     end
   end
