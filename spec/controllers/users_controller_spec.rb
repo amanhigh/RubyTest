@@ -113,19 +113,9 @@ describe UsersController do
       test_sign_in @user
     end
 
-    it 'should be successfull' do
+    it 'should be successful' do
       get :edit, :id => @user
       response.should be_success
-    end
-
-    it 'should have right title' do
-      visit edit_user_path(@user)
-      page.should have_selector('title', :text => 'Edit user')
-    end
-
-    it 'should have gravatar edit link' do
-      visit edit_user_path(@user)
-      page.should have_selector('a[href="http://gravatar.com/email"]', :text => 'Change')
     end
   end
 
@@ -143,11 +133,6 @@ describe UsersController do
       it 'should render the edit page' do
         put :update, :id => @user, :user => @attr
         response.should render_template('edit')
-      end
-
-      it 'should have right title' do
-        visit edit_user_path(:id => @user, :user => @attr)
-        page.should have_selector('title', :text => 'Edit user')
       end
     end
 
@@ -173,4 +158,20 @@ describe UsersController do
     end
   end
 
+  describe "authentication of edit/update actions" do
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+    end
+
+    it 'should deny access to "edit"' do
+      get :edit, :id => @user
+      response.should redirect_to(signin_path)
+    end
+
+    it 'should deny access to "update"' do
+      put :update, :id => @user, :user => {}
+      response.should redirect_to(signin_path)
+    end
+
+  end
 end
