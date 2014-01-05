@@ -1,4 +1,6 @@
 RubyTest::Application.routes.draw do
+  get "sessions/new"
+
   get "pages/help"
   get "pages/home"
   get "pages/contact"
@@ -9,8 +11,11 @@ RubyTest::Application.routes.draw do
   match '/help', :to => 'pages#help'
   match '/about', :to => 'pages#about'
   match '/signup', :to => 'users#new'
+  match '/signin', :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
 
   resources :users
+  resources :sessions, :only => [:new, :create, :destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

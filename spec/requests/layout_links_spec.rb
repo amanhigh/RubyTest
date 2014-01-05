@@ -16,8 +16,8 @@ describe "LayoutLinks" do
     click_link 'Sign up now!'
     page.should have_selector('title', :text => "Sign up")
 
-    click_link 'Sign up'
-    page.should have_selector('title', :text => "Sign up")
+    click_link 'Sign in'
+    page.should have_selector('title', :text => "Sign in")
   end
 
 end
