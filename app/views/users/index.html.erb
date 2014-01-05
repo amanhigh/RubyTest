@@ -1,0 +1,12 @@
+<hi> All users</hi>
+
+<%= will_paginate %>
+<br/>
+<ul>
+    <% @users.each do |user| %>
+        <li><%= gravatar_for(user) %> <%= link_to user.name, user %> </li>
+    <% end %>
+
+</ul>
+<br/>
+<%= will_paginate %>
