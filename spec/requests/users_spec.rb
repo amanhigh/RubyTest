@@ -34,4 +34,30 @@ describe "Users" do
     end
 
   end
+
+  describe "signin" do
+
+    describe "failure" do
+      it 'should not the sign the user in' do
+        visit signin_path
+        visit signin_path
+        fill_in "Email", :with => ""
+        fill_in "Password", :with => ""
+        click_button 'Sign in'
+        page.should have_selector('div.flash.error', :text => 'Invalid')
+      end
+    end
+
+    describe "success" do
+      it 'should sign a user in and out' do
+        user = FactoryGirl.create(:user)
+        visit signin_path
+        fill_in "Email", :with => user.email
+        fill_in "Password", :with => user.password
+        click_button 'Sign in'
+        click_link 'Sign out'
+        page.should have_selector('a', :text => 'Sign in')
+      end
+    end
+  end
 end
