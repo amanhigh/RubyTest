@@ -1,13 +1,13 @@
-require 'faker'
-require 'factory_girl'
-
 namespace :db do
   describe "Fill database with sample data"
   task populate: :environment do
     environment = ENV['RAILS_ENV=']
     unless environment=='production'
-      puts "Running in #{environment} environment"
+      require 'faker'
+      require 'factory_girl'
       require File.expand_path("spec/factories.rb")
+
+      puts "Running in #{environment} environment"
       admin = FactoryGirl.create(:user)
       admin.toggle!(:admin)
 
