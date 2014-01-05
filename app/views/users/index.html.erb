@@ -4,9 +4,14 @@
 <br/>
 <ul>
     <% @users.each do |user| %>
-        <li><%= gravatar_for(user) %> <%= link_to user.name, user %> </li>
+        <li>
+            <%= gravatar_for(user) %>
+            <%= link_to user.name, user %>
+            <% if current_user.admin? && !user.admin? %>
+                <%= link_to 'Delete', user, :method => :delete, :confirm => 'You sure ?', :title => "Delete #{user.name}" %>
+            <% end %>
+        </li>
     <% end %>
-
 </ul>
 <br/>
 <%= will_paginate %>
