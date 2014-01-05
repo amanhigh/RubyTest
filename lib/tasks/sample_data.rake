@@ -1,5 +1,4 @@
 namespace :db do
-  describe "Fill database with sample data"
   task populate: :environment do
     environment = ENV['RAILS_ENV=']
     unless environment=='production'
