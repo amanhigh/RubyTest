@@ -12,6 +12,10 @@
                         <%= f.submit "Submit" %>
                     </div>
                 <% end %>
+
+                <% if @feed_items.any? %>
+                    <%= render :partial => 'shared/feed_item', :collection => @feed_items %>
+                <% end %>
             </td>
 
             <td class="sidebar round">
