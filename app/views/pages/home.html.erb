@@ -1,4 +1,36 @@
-<h1>Home</h1>
-<p>Ruby on Rails Sample App</p>
+<% if signed_in? %>
+    <table class="front">
+        <tr>
+            <td class="main">
+                <h1 class="micropost"> Whats up ?</h1>
+                <%= form_for(@micropost) do |f| %>
+                    <%= render 'shared/error_messages', :object => f.object %>
+                    <div class="field">
+                        <%= f.text_area :content %>
+                    </div>
+                    <div class="actions">
+                        <%= f.submit "Submit" %>
+                    </div>
+                <% end %>
+            </td>
 
-<%= link_to 'Sign up now!', signup_path, :class => "signup_button box" %>
+            <td class="sidebar round">
+                <div class="user_info">
+                    <%= link_to gravatar_for(current_user), user_path(current_user) %>
+                    <span class="user_name">
+                        <%= current_user.name %>
+                    </span>
+                    <span class="microposts">
+                        <%= pluralize(current_user.microposts.count, 'micropost') %>
+                    </span>
+
+                </div>
+            </td>
+        </tr>
+    </table>
+<% else %>
+    <h1>Home</h1>
+    <p>Ruby on Rails Sample App</p>
+
+    <%= link_to 'Sign up now!', signup_path, :class => "signup_button box" %>
+<% end %>

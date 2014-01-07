@@ -15,6 +15,7 @@ RubyTest::Application.routes.draw do
   match '/signout', :to => 'sessions#destroy'
 
   resources :users
+  resources :microposts, :only => [:create, :destroy]
   resources :sessions, :only => [:new, :create, :destroy]
 
   # The priority is based upon order of creation:

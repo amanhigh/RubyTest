@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(:page => params[:page], :per_page => 10)
     @title = @user.name
   end
 
@@ -62,8 +63,4 @@ class UsersController < ApplicationController
     redirect_to root_path unless current_user.admin?
   end
 
-  private
-  def authenticate
-    deny_access unless signed_in?
-  end
 end

@@ -38,6 +38,7 @@ describe UsersController do
       visit user_path(@user)
       page.should have_selector('td>a', :text => user_path(@user), :href => user_path(@user))
     end
+
   end
 
   describe "GET 'new'" do
