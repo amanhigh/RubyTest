@@ -21,6 +21,13 @@ namespace :db do
         FactoryGirl.create(:micropost, :user => User.find(rand(2..4)), :content => Faker::Lorem.sentence(5))
       end
 
+      users = User.all
+      user = User.first
+      following = users[1..50]
+      followers = users[4..41]
+      following.each { |followed| user.follow!(followed) }
+      followers.each { |follower| follower.follow!(user) }
+
       puts 'Sample Data created'
     end
   end
