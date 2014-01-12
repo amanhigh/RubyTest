@@ -144,7 +144,7 @@ describe User do
       end
     end
 
-    describe "status" do
+    describe "feed content" do
       let(:unfollowed_post) do
         FactoryGirl.create(:micropost, user: FactoryGirl.create(:user))
       end
