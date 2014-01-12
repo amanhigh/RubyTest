@@ -1,4 +1,4 @@
-<h1>Edit user</h1>
+<h1>Update your profile</h1>
 <%= form_for(@user) do |f| %>
     <%= render 'fields', :f => f %>
     <div class="actions"><%= f.submit 'Update' %></div>
@@ -6,5 +6,5 @@
 
 <div>
     <%= gravatar_for @user %>
-    <%= link_to 'Change', 'http://gravatar.com/email' %>
+    <%= link_to 'Change', 'http://gravatar.com/emails' %>
 </div>

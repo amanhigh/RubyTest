@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates :email, :presence => true, format: {with: VALID_EMAIL_REGEX}, :uniqueness => {:case_sensitive => false}
   validates :password, :presence => true, :confirmation => true, :length => {:within => 6..40}
 
-  before_save { create_remember_token }
+  before_create { create_remember_token }
   before_save { self.email.downcase! }
   public
 
