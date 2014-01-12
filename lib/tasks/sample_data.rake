@@ -8,7 +8,7 @@ namespace :db do
       require File.expand_path("spec/factories.rb")
 
       puts "Running in #{environment} environment"
-      admin = FactoryGirl.create(:user)
+      admin = FactoryGirl.create(:user, name: 'Aman', email: 'coool.aman@gmail.com', password: 'amanps', password_confirmation: 'amanps')
       admin.toggle!(:admin)
 
       99.times do |n|

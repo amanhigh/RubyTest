@@ -1,50 +1,64 @@
 require 'spec_helper'
 
-describe "LayoutLinks" do
+describe "Layout links" do
 
-  it 'should have right links in layout' do
-    visit root_path
-    page.should have_selector('title', :text => "Home")
-    page.should have_selector('a[href="/"]>img[alt="Sample App"]')
-    click_link 'About'
-    page.should have_selector('title', :text => "About")
-    click_link 'Contact'
-    page.should have_selector('title', :text => "Contact")
-    click_link 'Help'
-    page.should have_selector('title', :text => "Help")
-    click_link 'Home'
-    click_link 'Sign up now!'
-    page.should have_selector('title', :text => "Sign up")
-  end
+  subject { page }
 
-  describe "when not signed in" do
-    it 'should have a signin link' do
-      visit root_path
-      page.should have_selector('a', :href => signin_path, :text => 'Sign in')
+  describe "Home page" do
+    before { visit root_path }
+
+    it { should have_content('Sample App') }
+    it { should have_title(full_title('')) }
+    it { should_not have_title('| Home') }
+
+    describe "for signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
+      before do
+        FactoryGirl.create(:micropost, user: user, content: "Lorem")
+        FactoryGirl.create(:micropost, user: user, content: "Ipsum")
+        sign_in user
+        visit root_path
+      end
+
+      it "should render the user's feed" do
+        user.feed.each do |item|
+          expect(page).to have_selector("li##{item.id}", text: item.content)
+        end
+      end
+
+      describe "follower/following counts" do
+        let(:other_user) { FactoryGirl.create(:user) }
+        before do
+          other_user.follow!(user)
+          visit root_path
+        end
+
+        it { should have_link("0 following", href: following_user_path(user)) }
+        it { should have_link("1 followers", href: followers_user_path(user)) }
+      end
     end
   end
 
-  describe "when signed in" do
-    before(:each) do
-      @user = FactoryGirl.create(:user)
-      visit signin_path
-      fill_in "Email", :with => @user.email
-      fill_in "Password", :with => @user.password
-      click_button 'Sign in'
-    end
+  describe "Help page" do
+    before { visit help_path }
 
-    it 'should have a sign out link' do
-      page.should have_selector('a', :href => signout_path, :text => 'Sign out')
-    end
-
-    it 'should have a profile link' do
-      visit root_path
-      page.should have_selector('a', :href => user_path(@user), :text => 'Profile')
-    end
-
-    it 'should have a settings link' do
-      visit root_path
-      page.should have_selector('a', :href => edit_user_path(@user), :text => 'Settings')
-    end
+    it { should have_content('Help') }
+    it { should have_title(full_title('Help')) }
   end
+
+  describe "About page" do
+    before { visit about_path }
+
+    it { should have_content('About') }
+    it { should have_title(full_title('About Us')) }
+  end
+
+  describe "Contact page" do
+    before { visit contact_path }
+
+    it { should have_selector('h1', text: 'Contact') }
+    it { should have_title(full_title('Contact')) }
+  end
+
+
 end
