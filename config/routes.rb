@@ -1,4 +1,6 @@
 RubyTest::Application.routes.draw do
+  get "relationships/create"
+  get "relationships/destroy"
   root to: 'pages#home'
   match '/contact', to: 'pages#contact', via: 'get'
   match '/help', to: 'pages#help', via: 'get'
