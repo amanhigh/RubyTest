@@ -139,7 +139,7 @@
     <orderEntry type="library" scope="PROVIDED" name="websocket (v1.0.7, Rvm Ruby) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="will_paginate (v3.0.4, Rvm Ruby) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="xpath (v2.0.0, Rvm Ruby) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="zeus (v0.13.3, Rvm Ruby) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="zeus (v0.13.4.pre2, Rvm Ruby) [gem]" level="application" />
   </component>
   <component name="RModuleSettingsStorage">
     <LOAD_PATH number="0" />
