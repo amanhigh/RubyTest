@@ -13,7 +13,7 @@ group :development, :test do
   gem 'sqlite3', '1.3.8'
   gem 'rspec-rails', '2.13.1'
   # The following optional lines are part of the advanced setup.
-  gem 'zeus'
+  gem "zeus", "~> 0.13.4.pre2"
   gem 'childprocess', '0.3.6'
 end
 
