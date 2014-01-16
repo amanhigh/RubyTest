@@ -154,7 +154,7 @@ describe "User pages" do
 
         it { should have_link('Sign out') }
         it { should have_title(user.name) }
-        it { should have_selector('div.flash.success', text: 'Welcome') }
+        it { should have_selector('div.alert.alert-success', text: 'Welcome') }
       end
     end
   end
@@ -168,7 +168,7 @@ describe "User pages" do
 
     describe "page" do
       it { should have_content("Update your profile") }
-      it { should have_title("Edit user") }
+      it { should have_title("Edit User") }
       it { should have_link('Change', href: 'http://gravatar.com/emails') }
     end
 
@@ -190,7 +190,7 @@ describe "User pages" do
       end
 
       it { should have_title(new_name) }
-      it { should have_selector('div.flash.success') }
+      it { should have_selector('div.alert.alert-success') }
       it { should have_link('Sign out', href: signout_path) }
       specify { expect(user.reload.name).to eq new_name }
       specify { expect(user.reload.email).to eq new_email }

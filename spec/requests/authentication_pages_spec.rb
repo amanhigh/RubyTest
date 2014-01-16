@@ -22,7 +22,7 @@ describe "Authentication" do
 
       describe "after visiting another page" do
         before { click_link "Home" }
-        it { should_not have_selector('div.flash.error') }
+        it { should_not have_selector('alert alert-error') }
       end
     end
 
@@ -64,7 +64,7 @@ describe "Authentication" do
         describe "after signing in" do
 
           it "should render the desired protected page" do
-            expect(page).to have_title('Edit user')
+            expect(page).to have_title('Edit User')
           end
         end
       end

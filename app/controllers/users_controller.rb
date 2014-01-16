@@ -4,13 +4,11 @@ class UsersController < ApplicationController
   before_filter :admin_user, :only => :destroy
 
   def new
-    @title = 'Sign up'
     @user = User.new
   end
 
   def index
     @users = User.paginate(page: params[:page], per_page: 10)
-    @title = 'All Users'
   end
 
   def show
@@ -25,14 +23,12 @@ class UsersController < ApplicationController
       sign_in @user
       redirect_to @user, flash: {success: 'Welcome to the Sample App!'}
     else
-      @title = 'Sign up'
       render 'new'
     end
   end
 
 
   def edit
-    @title = 'Edit user'
     @user = User.find(params[:id])
   end
 
@@ -41,7 +37,6 @@ class UsersController < ApplicationController
     if @user.update_attributes(user_params)
       redirect_to @user, :flash => {:success => 'Profile updated !!'}
     else
-      @title = 'Edit user'
       render 'edit'
     end
   end
