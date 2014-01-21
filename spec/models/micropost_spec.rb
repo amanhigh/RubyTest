@@ -1,37 +1,32 @@
 require 'spec_helper'
 
 describe Micropost do
-  before(:each) do
-    @user = FactoryGirl.create(:user)
-    @attr = {:content => 'Test'}
+
+  let(:user) { FactoryGirl.create(:user) }
+  before do
+    # This code is not idiomatically correct.
+    @micropost = FactoryGirl.build(:micropost, user: user)
   end
 
-  it 'should create it with valid attribs' do
-    @user.microposts.create!(@attr)
+  subject { @micropost }
+
+  it { should respond_to(:content) }
+  it { should respond_to(:user_id) }
+  its (:user) { should == user }
+  it { should be_valid }
+
+  describe "when user_id is not present" do
+    before { @micropost.user_id = nil }
+    it { should_not be_valid }
   end
 
-  describe "User associations" do
-    before(:each) do
-      @micropost = @user.microposts.create!(@attr)
-    end
-
-    it 'should have a user attribute' do
-      @micropost.should respond_to(:user)
-    end
-
-    it 'should have right assocated user' do
-      @micropost.user_id.should == @user.id
-      @micropost.user.should == @user
-    end
+  describe "with blank content" do
+    before { @micropost.content = " " }
+    it { should_not be_valid }
   end
 
-  describe "validations" do
-    it 'should require nonblank content' do
-      @user.microposts.build(:content => '        ').should_not be_valid
-    end
-
-    it 'should not be too long' do
-      @user.microposts.build(:content => 'a' * 141).should_not be_valid
-    end
+  describe "with content that is too long" do
+    before { @micropost.content = "a" * 141 }
+    it { should_not be_valid }
   end
 end

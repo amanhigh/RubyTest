@@ -1,15 +1,14 @@
 module SessionsHelper
   def sign_in(user)
-    cookies.permanent.signed[:remember_token] = [user.id, user.salt]
-    self.current_user = user
-  end
-
-  def current_user=(user)
+    remember_token = User.new_remember_token
+    cookies.permanent[:remember_token] = remember_token
+    user.update_attribute(:remember_token, User.encrypt(remember_token))
     @current_user = user
   end
 
   def current_user
-    @current_user ||= user_from_remember_token
+    remember_token = User.encrypt(cookies[:remember_token])
+    @current_user ||= User.find_by_remember_token(remember_token)
   end
 
   def signed_in?
@@ -17,8 +16,9 @@ module SessionsHelper
   end
 
   def sign_out
+    current_user.update_attribute(:remember_token, User.new_remember_token)
     cookies.delete(:remember_token)
-    self.current_user = nil
+    @current_user = nil
   end
 
   private
@@ -47,14 +47,4 @@ module SessionsHelper
   def clear_location
     session[:return_to] = nil
   end
-
-  private
-  def user_from_remember_token
-    User.authenticate_with_salt(*remember_token)
-  end
-
-  def remember_token
-    cookies.signed[:remember_token] || [nil, nil]
-  end
-
 end

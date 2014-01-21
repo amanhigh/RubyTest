@@ -1,39 +1,56 @@
 source 'https://rubygems.org'
+ruby '2.0.0'
+#Nokogiri fails then use NOKOGIRI_USE_SYSTEM_LIBRARIES=1 bundle install
 
-gem 'rails', '3.2.16'
-gem 'bootstrap-sass', '2.1'
-gem 'bcrypt-ruby', '3.0.1'
-gem 'faker', '1.0.1'
-gem 'will_paginate', '3.0.3'
-gem 'bootstrap-will_paginate', '0.0.6'
-gem 'jquery-rails', '2.0.2'
+gem 'rails', '4.0.2'
+
+# Use ActiveModel has_secure_password
+gem 'bcrypt-ruby', '3.1.2'
+
+#CSS & Layout
+gem 'bootstrap-sass', '2.3.2.0'
+gem 'will_paginate', '3.0.4'
+gem 'bootstrap-will_paginate', '0.0.9'
 
 group :development, :test do
-  gem 'sqlite3', '1.3.5'
-  gem 'rspec-rails', '2.11.0'
-  gem 'zeus'
-  gem 'childprocess', '0.3.6'
-  gem 'rb-readline'
-end
-
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '3.2.5'
-  gem 'coffee-rails', '3.2.2'
-  gem 'uglifier', '1.2.3'
+  gem 'sqlite3', '1.3.8'
+  gem 'rspec-rails', '2.13.1'
+  gem "zeus", "~> 0.13.4.pre2"
 end
 
 group :test do
-  gem 'capybara', '1.1.2'
-  gem 'factory_girl_rails', '4.1.0'
-  gem 'cucumber-rails', '1.2.1', :require => false
-  gem 'database_cleaner', '0.7.0'
-  # gem 'launchy', '2.1.0'
-  # gem 'rb-fsevent', '0.9.1', :require => false
-  # gem 'growl', '1.0.3'
+  gem 'selenium-webdriver', '2.35.1'
+  gem 'capybara', '2.1.0'
+  gem 'factory_girl_rails', '4.2.0'
+  gem 'faker', '1.1.2'
+end
+
+# Use SCSS for stylesheets
+gem 'sass-rails', '4.0.1'
+
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '2.1.1'
+
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails', '4.0.1'
+
+# Use jquery as the JavaScript library
+gem 'jquery-rails', '3.0.4'
+
+# Turbolinks makes following links in your web application faster.
+# Read more: https://github.com/rails/turbolinks
+gem 'turbolinks', '1.1.1'
+
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '1.0.2'
+
+group :doc do
+  #Generating doc using 'sdoc generator=shtml'
+  gem 'sdoc', '0.3.20', require: false
 end
 
 group :production do
-  gem 'pg', '0.12.2'
+  #Required for heroku.
+  gem 'pg', '0.15.1'
+  gem 'rails_12factor', '0.0.2'
 end

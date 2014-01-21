@@ -8,11 +8,11 @@ namespace :db do
       require File.expand_path("spec/factories.rb")
 
       puts "Running in #{environment} environment"
-      admin = FactoryGirl.create(:user)
+      admin = FactoryGirl.create(:user, name: 'Aman', email: 'coool.aman@gmail.com', password: 'amanps', password_confirmation: 'amanps')
       admin.toggle!(:admin)
 
       99.times do |n|
-        FactoryGirl.create(:user, :name => Faker::Name.name, :email => "test#{n+1}@test.com")
+        FactoryGirl.create(:user, :name => Faker::Name.name)
       end
 
 
@@ -22,11 +22,11 @@ namespace :db do
       end
 
       users = User.all
-      user = User.first
+      admin = User.first
       following = users[1..50]
       followers = users[4..41]
-      following.each { |followed| user.follow!(followed) }
-      followers.each { |follower| follower.follow!(user) }
+      following.each { |followed| admin.follow!(followed) }
+      followers.each { |follower| follower.follow!(admin) }
 
       puts 'Sample Data created'
     end
