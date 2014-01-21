@@ -40,6 +40,12 @@ describe "Micropost pages" do
       it "should delete a micropost" do
         expect { click_link "delete" }.to change(Micropost, :count).by(-1)
       end
+
+      describe "should show flash message and update post count" do
+        before { click_link "delete" }
+        it { should have_selector('div.alert.alert-success', text: 'deleted') }
+        it { should have_selector('span', text: '0 micropost') }
+      end
     end
   end
 end
