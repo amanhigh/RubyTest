@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
+ruby '2.1.1'
 #Nokogiri fails then use NOKOGIRI_USE_SYSTEM_LIBRARIES=1 bundle install
 
 gem 'rails', '4.0.2'
@@ -15,18 +15,18 @@ gem 'bootstrap-will_paginate', '0.0.9'
 group :development, :test do
   gem 'sqlite3', '1.3.8'
   gem 'rspec-rails', '2.13.1'
+  gem 'factory_girl_rails', '4.2.0'
   gem "zeus", "~> 0.13.4.pre2"
 end
 
 group :test do
   gem 'selenium-webdriver', '2.35.1'
   gem 'capybara', '2.1.0'
-  gem 'factory_girl_rails', '4.2.0'
   gem 'faker', '1.1.2'
 end
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '4.0.1'
+gem 'sass-rails', "~>4.0.2"
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '2.1.1'
