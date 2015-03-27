@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.1'
+ruby '2.1.5'
 #Nokogiri fails then use NOKOGIRI_USE_SYSTEM_LIBRARIES=1 bundle install
 
 gem 'rails', '4.0.2'
@@ -13,7 +13,7 @@ gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 
 group :development, :test do
-  gem 'sqlite3', '1.3.8'
+  gem 'sqlite3', '1.3.10'
   gem 'rspec-rails', '2.13.1'
   gem 'factory_girl_rails', '4.2.0'
   gem "zeus", "~> 0.13.4.pre2"
