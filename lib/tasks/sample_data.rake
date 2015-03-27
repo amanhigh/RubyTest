@@ -1,20 +1,17 @@
+# Run using rake db:populate
+# Seed Creates Admin (seeds.rb) rest of the data created by this file
 namespace :db do
   task populate: :environment do
-    environment = ENV['RAILS_ENV=']
+    environment = Rails.env
     unless environment=='production'
       require 'faker'
       require 'rake'
       require 'factory_girl'
-      require File.expand_path("spec/factories.rb")
 
       puts "Running in #{environment} environment"
-      admin = FactoryGirl.create(:user, name: 'Aman', email: 'coool.aman@gmail.com', password: 'amanps', password_confirmation: 'amanps')
-      admin.toggle!(:admin)
-
       99.times do |n|
         FactoryGirl.create(:user, :name => Faker::Name.name)
       end
-
 
       100.times do
         FactoryGirl.create(:micropost, :user => User.find(1), :content => Faker::Lorem.sentence(5))

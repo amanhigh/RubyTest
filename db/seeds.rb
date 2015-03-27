@@ -5,3 +5,17 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+require 'faker'
+require 'rake'
+require 'factory_girl'
+
+environment = ENV['RAILS_ENV=']
+puts "Seeding Data in #{environment} environment"
+if not User.find_by_admin(true)
+  admin = FactoryGirl.create(:user, name: 'Aman', email: 'coool.aman@gmail.com', password: 'amanps', password_confirmation: 'amanps')
+  admin.toggle!(:admin)
+  puts "Admin Created"
+else
+  puts "Admin Already Exist"
+end
